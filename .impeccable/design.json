@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-21T00:00:00+08:00",
+  "title": "Design System: BarcaBoy109 portfolio",
+  "extensions": {
+    "motion": [
+      {
+        "name": "screenshot-surround",
+        "purpose": "Screenshot hover; disabled for reduced motion.",
+        "value": "background .25s"
+      },
+      {
+        "name": "weather",
+        "purpose": "Paused by visitor preference, reduced motion, or hidden document.",
+        "value": "requestAnimationFrame"
+      }
+    ],
+    "typographyMeta": {
+      "headline": {
+        "purpose": "Section headings",
+        "displayName": "Headline"
+      },
+      "body": {
+        "purpose": "Project descriptions",
+        "displayName": "Body"
+      },
+      "display": {
+        "purpose": "Hero headline",
+        "displayName": "Display"
+      }
+    },
+    "shadows": [],
+    "breakpoints": [
+      {
+        "value": "900px",
+        "name": "tablet"
+      },
+      {
+        "value": "600px",
+        "name": "mobile"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Weather control",
+      "html": "<button class=\"ds-control\" type=\"button\" aria-pressed=\"false\">Pause weather</button>",
+      "description": "Native weather pause/play button.",
+      "kind": "button",
+      "refersTo": "control",
+      "css": ".ds-control{min-height:44px;background:var(--paper,#110e0c);color:var(--ink,#f4eee8);border:1px solid var(--line,#49382d);border-radius:6px;padding:8px 12px;font:400 16px Public Sans,sans-serif; cursor:pointer}.ds-control:hover{border-color:var(--accent,#edac79)}.ds-control:focus-visible{outline:2px solid var(--accent,#edac79);outline-offset:6px}"
+    },
+    {
+      "name": "Atmosphere selector",
+      "html": "<label class=\"ds-label\">Atmosphere <select class=\"ds-select\"><option>Follow the seasons</option><option>Winter</option><option>Monsoon</option></select></label>",
+      "description": "Native edition selection.",
+      "kind": "input",
+      "refersTo": "control",
+      "css": ".ds-label{font:12px Public Sans,sans-serif;color:var(--muted,#bdb0a6)}.ds-select{min-height:44px;background:var(--paper,#110e0c);color:var(--ink,#f4eee8);border:1px solid var(--line,#49382d);border-radius:6px;padding:8px 12px;font:400 16px Public Sans,sans-serif;}.ds-select:hover{border-color:var(--accent,#edac79)}.ds-select:focus-visible{outline:2px solid var(--accent,#edac79);outline-offset:6px}"
+    },
+    {
+      "name": "Product action",
+      "description": "Direct app or installation destination.",
+      "html": "<a class=\"ds-action\" href=\"https://object-lab.vercel.app/\">Open app</a>",
+      "kind": "custom",
+      "css": ".ds-action{display:inline-flex;align-items:center;min-height:44px;color:var(--accent,#edac79);font:16px Public Sans,sans-serif;text-underline-offset:6px;text-decoration-thickness:1px}.ds-action:hover{color:var(--accent,#edac79)}.ds-action:focus-visible{outline:2px solid var(--accent,#edac79);outline-offset:6px}"
+    },
+    {
+      "name": "Navigation",
+      "description": "Simple work and profile navigation.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main\"><a href=\"#main\">Work</a><a href=\"https://github.com/BarcaBoy109\">GitHub</a></nav>",
+      "kind": "nav",
+      "css": ".ds-nav{display:flex;gap:36px}.ds-nav a{display:inline-flex;align-items:center;min-height:44px;font:14px Public Sans,sans-serif;color:var(--ink,#f4eee8);text-decoration:none}.ds-nav a:hover{color:var(--accent,#edac79)}.ds-nav a:focus-visible{outline:2px solid var(--accent,#edac79);outline-offset:6px}"
+    },
+    {
+      "name": "Development entry",
+      "description": "Unlinked work in development.",
+      "html": "<article class=\"ds-development\"><h3>CoursePlan</h3><p>A course timetable planner with section comparison and conflict detection.</p></article>",
+      "kind": "custom",
+      "css": ".ds-development h3{font:700 23px Syne,sans-serif;margin:0 0 12px;color:var(--ink,#f4eee8)}.ds-development p{font:400 14px/1.8 Public Sans,sans-serif;margin:0;color:var(--muted,#bdb0a6)}"
+    }
+  ],
+  "narrative": {
+    "dos": [
+      "Do use actual product screenshots with accurate provenance and captions.",
+      "Do preserve direct usable product links and the unlinked development list.",
+      "Do keep seasonal effects optional and behind readable content."
+    ],
+    "overview": "The confirmed direction is a dark, bold, spacious portfolio closer to redoyanulhaque.me. This is a code-led implementation; no approved visual comp exists. Large typography and real product screenshots carry the composition, with seasonal weather supplying atmosphere.",
+    "donts": [
+      "Don't invent identity details, product interfaces, deployment URLs, or personal dates.",
+      "Don't treat reference-site personal content as portfolio content."
+    ],
+    "rules": [],
+    "keyCharacteristics": [
+      "Oversized Syne headings and quiet Public Sans descriptions.",
+      "Alternating screenshot and copy rows with direct product actions.",
+      "Dark seasonal palettes and optional ambient motion."
+    ]
+  }
+}
