@@ -4,6 +4,7 @@ const files = new Set(['index.html','styles.css','app.js','content.js','themes.j
 const types = { html:'text/html',css:'text/css',js:'text/javascript',ttf:'font/ttf',jpg:'image/jpeg',png:'image/png' };
 for (const id of ['objectlab','matchalert','pdf-inverter']) files.add(`assets/screenshots/${id}.jpg`);
 files.add('assets/screenshots/resource-packer.png');
+files.add('assets/favicon.png');
 files.add('assets/fonts/syne.ttf');
 files.add('assets/fonts/public-sans.ttf');
 files.add('preview.html');
