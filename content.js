@@ -7,8 +7,15 @@ export const profile = {
   timeZone: 'Asia/Singapore',
 };
 
-// Published destinations verified on 2026-10-20. Keep unavailable work below.
+// Keep published work here and unavailable work in inDevelopment below.
 export const projects = [
+  {
+    id: 'slack-slapper', name: 'Slack Slapper',
+    description: 'Catch yourself slacking off. Set limits for distracting sites and get nudged back to work with roasts, memes, and optional spoken reminders.',
+    live: 'https://chromewebstore.google.com/detail/slack-slapper/bggonnmemcakekechoknckcpkaikgfbg',
+    action: 'Get Chrome extension',
+    screenshot: false,
+  },
   {
     id: 'objectlab', name: 'ObjectLab',
     description: 'See what Java is doing. Step through your code and follow objects, references, and the call stack as they change.',
