@@ -11,7 +11,7 @@ This is my personal portfolio. It presents my software projects, work in progres
 
 ## Projects
 
-Published projects are Slack Slapper, ObjectLab, Match Alert, PDF Colour Inverter, and Resource Packer. Slack Slapper is a Chrome extension that nudges users away from distracting sites with roasts, memes, and optional spoken reminders; its text-only row links to the official Chrome Web Store listing. Match Alert links to its Discord installation flow and its published website. CoursePlan and cohabit are still in progress.
+Published projects are Slack Slapper, ObjectLab, Match Alert, PDF Colour Inverter, and Resource Packer. Slack Slapper is a Chrome extension that nudges users away from distracting sites with roasts, memes, and optional spoken reminders; its screenshot and installation link open the official Chrome Web Store listing. Match Alert links to its Discord installation flow and its published website. CoursePlan and cohabit are still in progress.
 
 ## Outside coding
 

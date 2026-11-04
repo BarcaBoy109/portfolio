@@ -14,7 +14,9 @@ export const projects = [
     description: 'Catch yourself slacking off. Set limits for distracting sites and get nudged back to work with roasts, memes, and optional spoken reminders.',
     live: 'https://chromewebstore.google.com/detail/slack-slapper/bggonnmemcakekechoknckcpkaikgfbg',
     action: 'Get Chrome extension',
-    screenshot: false,
+    screenshot: 'slack-slapper.png', screenshotWidth: 1280, screenshotHeight: 800,
+    screenshotAlt: 'Slack Slapper roast overlay with a productivity meme and a back-to-work button',
+    preview: false,
   },
   {
     id: 'objectlab', name: 'ObjectLab',

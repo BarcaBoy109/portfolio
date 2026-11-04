@@ -38,76 +38,83 @@ for (const project of projects) {
     }
     const image = element('img');
     image.src = `assets/screenshots/${project.screenshot || `${project.id}.jpg`}`;
-    image.alt = project.id === 'matchalert' ? 'Match Alert’s published competition coverage page' : `${project.name} — actual application screenshot`;
+    image.alt = project.screenshotAlt || (project.id === 'matchalert' ? 'Match Alert’s published competition coverage page' : `${project.name} — actual application screenshot`);
     image.width = project.screenshotWidth || 1280;
     image.height = project.screenshotHeight || 720;
     image.style.aspectRatio = `${image.width} / ${image.height}`;
     image.loading = 'lazy';
-    const activate = element('button', 'preview-activate', 'Explore live website');
-    activate.type = 'button';
-    activate.setAttribute('aria-label', `Explore ${project.name} live website`);
-    activate.setAttribute('aria-controls', screen.id);
-    activate.setAttribute('aria-expanded', 'false');
-    const close = element('button', 'preview-close', 'Close preview');
-    close.type = 'button';
-    close.hidden = true;
-    const previewHint = project.previewViewport
-      ? 'Full workspace scaled to fit · Open website for a larger view'
-      : 'Scroll inside the preview';
-    const hintAction = element('button', 'preview-hint-action', 'Click to explore');
-    hintAction.type = 'button';
-    const hintSeparator = element('span', '', ' · ');
-    const status = element('span', 'preview-status', previewHint);
-    status.setAttribute('role', 'status');
-    hintAction.addEventListener('click', () => activate.click());
-    let frame;
-    const reset = () => {
-      frame?.remove();
-      frame = undefined;
-      image.hidden = false;
-      activate.hidden = false;
-      close.hidden = true;
-      hintAction.hidden = false;
-      hintSeparator.hidden = false;
+    if (project.preview === false) {
+      const screenshotLink = externalLink(previewUrl, 'screenshot-link');
+      screenshotLink.setAttribute('aria-label', `View ${project.name} on the Chrome Web Store`);
+      screenshotLink.append(image);
+      figure.append(screenshotLink, element('figcaption', '', 'Chrome extension · Roast overlay'));
+    } else {
+      const activate = element('button', 'preview-activate', 'Explore live website');
+      activate.type = 'button';
+      activate.setAttribute('aria-label', `Explore ${project.name} live website`);
+      activate.setAttribute('aria-controls', screen.id);
       activate.setAttribute('aria-expanded', 'false');
-      status.textContent = previewHint;
-      activate.focus({ preventScroll: true });
-    };
-    activate.addEventListener('click', () => {
-      frame = element('iframe', 'preview-frame');
-      frame.title = `${project.name} live website`;
-      frame.src = previewUrl;
-      frame.referrerPolicy = 'no-referrer';
-      frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads');
-      frame.addEventListener('load', () => {
-        status.textContent = project.previewViewport
-          ? 'Full workspace · Press Visualize to begin. Open website for a larger view.'
-          : 'Scroll inside to explore. Blank preview? Open the website.';
+      const close = element('button', 'preview-close', 'Close preview');
+      close.type = 'button';
+      close.hidden = true;
+      const previewHint = project.previewViewport
+        ? 'Full workspace scaled to fit · Open website for a larger view'
+        : 'Scroll inside the preview';
+      const hintAction = element('button', 'preview-hint-action', 'Click to explore');
+      hintAction.type = 'button';
+      const hintSeparator = element('span', '', ' · ');
+      const status = element('span', 'preview-status', previewHint);
+      status.setAttribute('role', 'status');
+      hintAction.addEventListener('click', () => activate.click());
+      let frame;
+      const reset = () => {
+        frame?.remove();
+        frame = undefined;
+        image.hidden = false;
+        activate.hidden = false;
+        close.hidden = true;
+        hintAction.hidden = false;
+        hintSeparator.hidden = false;
+        activate.setAttribute('aria-expanded', 'false');
+        status.textContent = previewHint;
+        activate.focus({ preventScroll: true });
+      };
+      activate.addEventListener('click', () => {
+        frame = element('iframe', 'preview-frame');
+        frame.title = `${project.name} live website`;
+        frame.src = previewUrl;
+        frame.referrerPolicy = 'no-referrer';
+        frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads');
+        frame.addEventListener('load', () => {
+          status.textContent = project.previewViewport
+            ? 'Full workspace · Press Visualize to begin. Open website for a larger view.'
+            : 'Scroll inside to explore. Blank preview? Open the website.';
+        });
+        frame.addEventListener('error', () => {
+          status.textContent = 'Preview unavailable. Open the website to explore.';
+        });
+        image.hidden = true;
+        activate.hidden = true;
+        close.hidden = false;
+        hintAction.hidden = true;
+        hintSeparator.hidden = true;
+        activate.setAttribute('aria-expanded', 'true');
+        status.textContent = 'Loading website… If it stays blank, open the website.';
+        screen.append(frame);
+        close.focus({ preventScroll: true });
       });
-      frame.addEventListener('error', () => {
-        status.textContent = 'Preview unavailable. Open the website to explore.';
+      close.addEventListener('click', reset);
+      preview.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && frame) reset();
       });
-      image.hidden = true;
-      activate.hidden = true;
-      close.hidden = false;
-      hintAction.hidden = true;
-      hintSeparator.hidden = true;
-      activate.setAttribute('aria-expanded', 'true');
-      status.textContent = 'Loading website… If it stays blank, open the website.';
-      screen.append(frame);
-      close.focus({ preventScroll: true });
-    });
-    close.addEventListener('click', reset);
-    preview.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && frame) reset();
-    });
-    screen.append(image, activate);
-    const toolbar = element('div', 'preview-toolbar');
-    toolbar.append(externalLink(previewUrl, 'preview-open', 'Open website ↗'), close);
-    preview.append(screen, toolbar);
-    const caption = element('figcaption');
-    caption.append(hintAction, hintSeparator, status);
-    figure.append(preview, caption);
+      screen.append(image, activate);
+      const toolbar = element('div', 'preview-toolbar');
+      toolbar.append(externalLink(previewUrl, 'preview-open', 'Open website ↗'), close);
+      preview.append(screen, toolbar);
+      const caption = element('figcaption');
+      caption.append(hintAction, hintSeparator, status);
+      figure.append(preview, caption);
+    }
     article.append(figure);
   }
   const detail = element('div', 'project-detail');
